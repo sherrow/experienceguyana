@@ -65,23 +65,22 @@ var HistoricalSite = L.icon({
     shadowAnchor: [22, 94]
 });
 
-L.autoResizeMarker([42.486, -71.236], {iconArray: ["Hotel","HistoricalSite"]});
 		
- var tourismData = L.geoJson().addTo(map);
+ var tourismData 
 
 // Add base layer
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
   maxZoom: 18
 }).addTo(map);
 
-function loadData(Category) {
-  // First clear the data from our GeoJSON layer
-      tourismData.clearLayers();
+// function loadData(Category) {
+//   // First clear the data from our GeoJSON layer
+//       tourismData.clearLayers();
   
-var quotedCategorys = [];
-  categoryCheckboxes.forEach(function (Category) {
-    quotedCategorys.push("'" + Category + "'");
-  });
+// var quotedCategorys = [];
+//   categoryCheckboxes.forEach(function (Category) {
+//     quotedCategorys.push("'" + Category + "'");
+//   });
   
 fetch('https://cdn.glitch.com/4a1d83f5-da2d-4d99-84a7-4a4b4b4f9400%2Fguyanadata2.geojson?1553074532060')
   .then(function (response) {
@@ -91,16 +90,15 @@ fetch('https://cdn.glitch.com/4a1d83f5-da2d-4d99-84a7-4a4b4b4f9400%2Fguyanadata2
   .then(function (data) {
        console.log (data);
   
-                       // {
+                       
 //     // Create the Leaflet layer for the data 
-         var tourismMarker=L.geoJson(data,{ 
+         tourismData = L.geoJson(data,{ 
       
       pointToLayer: function (geoJsonPoint, latlng) {
         console.log(geoJsonPoint);
         if (geoJsonPoint.properties.Category === "Resort")
         return L.marker(latlng, {icon:Resort}).addTo(map).bindPopup("Resort");
-        
-        
+                
         else if(geoJsonPoint.properties.Category === "Beach")
         return L.marker(latlng, {icon:Beach}).addTo(map).bindPopup("Beach");
         
@@ -138,43 +136,45 @@ fetch('https://cdn.glitch.com/4a1d83f5-da2d-4d99-84a7-4a4b4b4f9400%2Fguyanadata2
       }
    
       
-    })
-          tourismData.addData(tourismMarker)
+    });
+   // tourismData.addData(tourismMarker);
+  tourismData.addTo(map);
+  // // Move the map view so that the tourismData is visible
+   
    map.fitBounds(tourismData.getBounds());
   });
 
 
-}
- function getCheckedCategorys() {
-  var checkedCategorys = [];
+
+//  function getCheckedCategorys() {
+//   var checkedCategorys = [];
   
-  // Look at each boroughCheckbox
-  categoryCheckboxes.forEach(function(categoryCheckbox) {
-    // If it is checked...
-    if (categoryCheckbox.checked) {
-      // ...add its borough value to the array of checkedBoroughs
-      checkedCategorys.push(categoryCheckbox.dataset.borough);
-    }
-  });
+//   // Look at each boroughCheckbox
+//   categoryCheckboxes.forEach(function(categoryCheckbox) {
+//     // If it is checked...
+//     if (categoryCheckbox.checked) {
+//       // ...add its borough value to the array of checkedBoroughs
+//       checkedCategorys.push(categoryCheckbox.dataset.borough);
+//     }
+//   });
   
-  // Return the checkedBoroughs so we can filter on them
-  return checkedCategorys;
-}
+//   // Return the checkedBoroughs so we can filter on them
+//   return checkedCategorys;
+// }
 
 // Select all of the boroughCheckboxes
-var categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+// var categoryCheckboxes = document.querySelectorAll('.category-checkbox');
 
-// Add an event listener to each boroughCheckbox
-categoryCheckboxes.forEach(function (categoryCheckbox) {
-  categoryCheckbox.addEventListener('change', function () {
-    loadData(getCheckedCategorys());
-  });
-});
+// // Add an event listener to each boroughCheckbox
+// categoryCheckboxes.forEach(function (categoryCheckbox) {
+//   categoryCheckbox.addEventListener('change', function () {
+//     loadData(getCheckedCategorys());
+//   });
+// });
 
  
     // Add data to the map
     // tourismData.addTo(map);
   
-    // // Move the map view so that the tourismData is visible
    
   
