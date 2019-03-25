@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mustache sidebar | Leaflet</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    
+    <!-- Load Leaflet CSS -->
+    <link href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" rel="stylesheet">
+    
+    <!-- Load our styles -->
+    <link href="./styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class= "headingWrapper">
+      <h1>
+      Explore Guyana
+      </h1>
+    </div>
+    
+<!--     <div class="mNavContainer">
+      <nav class="pageNavContainer">
+        <ul>
+          <li class="pageNavfirstElement" style="display: inline-block;">
+            <a href="/activities" class="pageNavfirstElement a-icon--activities" title="Day trips and guided tours">
+            Day trips and guided tours
+            </a>
+            </li> 
+          
+          <li class="pageNavfirstElement" style="display: inline-block;">
+            <a href="/activities" class="pageNavfirstElement a-icon--activities" title="Day trips and guided tours">
+            Transportation
+            </a>
+          </li>       
+        </ul>
+      </nav>
+    
+    </div> -->
+    
+    <div id="map"></div>
+    
+<!--    create content seletor -->
+    <div class = "mapList">
+      <div class = "mapListContent">
+        <div class= "mapListHeader">
+          <h2>
+            Select what to see
+          </h2>
+        </div>
+        
+<!--         <div class="dropDown">
+        <select class="categoryPicker">
+          <option value="">Pick an Attraction</option>
+          <option value="Hotel">Hotels</option>
+          <option value="Nature">Nature</option> 
+        </select>
+        </div> -->
+        
+       
+        <ul class= "mapListItems">
+          <li>
+<!--             <h3 class = "mapListCategoryTitleIcon" >
+              <a href="#">Hotel</a>
+            </h3> -->
+             <input class="category-checkbox" type="checkbox" id="hotel" data-borough="Hotel" />
+          <label for="hotel">Hotel</label>
+          </li>
+          <li >
+<!--               <h3 class = "mapListCategoryTitleIcon" >
+               <a href="#">Nature</a>
+            </h3> -->
+            <input class="category-checkbox" type="checkbox" id="nature" data-borough="Nature" />
+          <label for="nature">Nature</label>
+          </li>
+          <li class="village" >
+            <h3 class = "mapListCategoryTitleIcon" >
+              <a href= "#">Indigenous Village</a>
+              
+            </h3>
+          </li>
+          <li class="beach" >
+           <h3 class = "mapListCategoryTitleIcon" >
+              <a href= "#">Beach</a>              
+           </h3>
+          </li>
+          <li class="resort" >
+           <h3 class = "mapListCategoryTitleIcon" >
+              <a href= "#">Resort</a>
+              </h3>
+          </li>
+          <li class="site" >
+            <h3 class = "mapListCategoryTitleIcon" >
+              <a href= "#">Historical Site</a>              
+            </h3>
+          </li>
+          <li class="lodge" >
+            <h3 class = "mapListCategoryTitleIcon" >
+              <a href= "#">Interior Lodge</a>              
+            </h3>
+          </li>
+           
+          
+        </ul>
+         
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="sidebar-content">
+      </div>
+     </div>
+    
+    
+<!--       This script element will not be displayed, it just holds our template -->
+    
+    <script class="popup-template" type="x-tmpl-mustache">
+      <div>        
+        <h3>{{Category}}</h3>
+        <div class= "Name" >{{Name}}</div>
+        <div class= "IMG"><a href=""><img src="{{Image}}"style="width:390px;height:350px;"></a></div>
+        <div class= "Description" style="text-align: center;width:390px">{{Description}}</div>
+        <div class= "MoreInfo">{{More Info}}</div>
+      </div>
+    </script>
+    
+    
+<!-- Load Leaflet library -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    
+    <!-- Load Promises polyfill -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+    
+    <!-- Load Fetch polyfill -->
+    <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.4/fetch.js"></script>
+    
+    <!-- import the Mustache library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.min.js"></script>
+    
+    <!-- Load our JavaScript -->
+    <script src="./script.js"></script>
+  </body>
+</html>
